@@ -18,16 +18,10 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors([{
-    origin: "https://chat-app-alpha-ashen.vercel.app",
-    credentials: true,
-  },
-{
-    origin: "https://localhost:5001",
-    credentials: true,
-  }])
-);
+app.use(cors({
+  origin: 'https://chat-app-alpha-ashen.vercel.app', // ✅ exact origin, not '*'
+  credentials: true, // ✅ allow cookies and auth headers
+}));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
